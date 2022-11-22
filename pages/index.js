@@ -53,10 +53,10 @@ export default function Home() {
       </Head>
 
       <main>
-        <div className="container max-w-[658px] mx-auto py-16">
-          <div className="quest text-5xl font-bold leading-tight uppercase">
+        <div className="container max-w-[658px] mx-auto py-8 md:py-16 px-4">
+          <div className="quest text-3xl md:text-5xl font-bold leading-tight uppercase">
             {party} must {paired ? verb + ' and ' + verb2 : verb} the {subject} in the {place}. 
-            <span className="text-3xl mt-6 block">
+            <span className="text-xl md:text-3xl mt-4 md:mt-6 block">
               {dothat} while dealing with {hinderance} and opposing {aan ? 'an' : 'a'} {opposition}.
             </span>
           </div>
@@ -65,7 +65,8 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <div className="absolute bottom-0 right-0 p-8 text-right flex flex-col text-xs">
+
+      <div className="absolute bottom-0 right-0 p-8 text-right flex flex-col text-xs text-[10px]">
         <span>
           Created by&nbsp;
           <Link href="https://github.com/as3k" target="_blank">ZG</Link>
