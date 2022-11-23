@@ -1,3 +1,4 @@
+import { locations, descriptions, verbs as v, concepts } from 'fun-word-list'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -10,7 +11,7 @@ export default function Home() {
   const parties = ['The Party', 'The group', 'Our Heroes', 'Our Mighty Crew', 'Our band of miscreants']
   const verbs = [ 'Attack', 'Rescue', 'Escort', 'Investigate', 'Aid', 'Transport', 'Steal', 'Fight', 'Blackmail', 'Hide', 'Shelter', 'Trick', 'Negotiate', 'Defend', 'Retrieve', 'Overcome', 'Invade', 'Kill', 'Capture', 'Free', 'Secure', 'Heal', 'Trade', 'Scare', 'Hunt', 'Find', 'Defend', 'Prevent', 'Cause', 'Serve', 'Take', 'Bargain', 'Explore', 'Sabotage', 'Kidnap', 'Lead', 'kill','assasinate','steal','plunder','sneak past','save','rescue','arrest','capture','destroy','escape','speak with','protect','infiltrate']
   const subjects = ['Human','Fey', 'Dwarf', 'Goblin','Salimar', 'Treefolk','Karhu','Lizardfolk', 'Royalty', 'Priest','Wizard', 'Scribe','Monster','Animal', 'Pirate', 'Bandit','Magic', 'Item', 'Enemy','Passenger','Riddle', 'Merchandise', 'Contraband','Performer', 'Caravan','Merchant','Thief', 'Warrior', 'Healer','Peasant', 'Beggar','Traveler','Innkeeper', 'Ghost', 'City','Watch', 'Witness', 'Alchemist',]
-  const places = ['Mountain Top','Ruins','Ocean','Desert','Island','Canyon','Mountain Pass','Temple','Ice Cave','Volcano','Forest','Whirlpool','Sunken City','Subterranean City','Forbidden City','Floating Fortress','Airship Fortress','Market','Tower','City Jail','Bridge','Sewers','Docks','Dungeon ','Graveyard ','Gambling House','Faerie Realm','Land of Dreams','Other Dimension','Castle','Monastery','Mine','Enemy','Territor','Dragon’s Den','Labyrinth',]
+  const places = ['Mountain Top','Ruins','Ocean','Desert','Island','Canyon','Mountain Pass','Temple','Ice Cave','Volcano','Forest','Whirlpool','Sunken City','Subterranean City','Forbidden City','Floating Fortress','Airship Fortress','Market','Tower','City Jail','Bridge','Sewers','Docks','Dungeon ','Graveyard ','Gambling House','Faerie Realm','Land of Dreams','Other Dimension','Castle','Monastery','Mine','Enemy Territory ','Dragon’s Den','Labyrinth',]
   const hinderances = ['Ally','Betrayal','Love','Broken Promise','Deception','Rival','Mentor','Family','Attack','Trap','Physical Illness','Weather','Finances','Theft','Spy','Double Agent','Revenge','Mental Illness','Red Herring','Transportation','Hostage','Kidnapping','Assassination','City Watch','Greed','Trust','Hatred','Jealousy','Bad Luck','Pride','Laziness','Lust','Gluttony','Neglect','Forgetfulness','Ignorance',]
   const oppositions = ['City Watch','City Leader','Spy','Politics','Moneylender','Scandal','Bandits','Pirates','Secret Society','Wizards’ Guild','Thieves’ Guild','Army','Monster','Flora','Fauna','Undead','Magic','Disease','Wizard','Necromancer','Cultists','Merchants','Alchemist','Murderer','Assassin','Time','Demon','Invasion ','Evil Genius','Dragon','Robber','Imposter','Faerie ','Curse ','Parasite ','Adventurers',]
   const doThats = ['Do That', 'They must do that', 'That\'s the task', 'Complete that']
@@ -23,8 +24,8 @@ export default function Home() {
   const [hinderance, setHinderance] = useState('')
   const [opposition, setOpposition] = useState('')
   const [dothat, setDoThat] = useState('')
-  const [aan, setAan] = useState(false)
   const [paired, setPaired] = useState(false)
+  const [desc, setDesc] = useState('')
 
   const reroll = () => {
     setParty ( getRandomItem(parties) )
@@ -36,13 +37,18 @@ export default function Home() {
     setOpposition ( getRandomItem(oppositions) )
     setDoThat (getRandomItem(doThats) )
     setPaired( getRandomItem(sino) )
-    setAan(() => {
-      const pattern = /^[aeiouAEIOU]\w+/
-      return pattern.test(opposition)
-    })
+    setDesc( getRandomItem(descriptions) )
+    
   }
 
-  useEffect(() => reroll(), [])
+  const aan = (word) => {
+    const pattern = /^[aeiouAEIOU]\w+/
+    return pattern.test(word)
+  }
+
+  useEffect(() => {
+    reroll()
+  }, [])
 
   return (
     <div>
@@ -55,9 +61,9 @@ export default function Home() {
       <main>
         <div className="container max-w-[658px] mx-auto py-8 md:py-16 px-4">
           <div className="quest text-3xl md:text-5xl font-bold leading-tight uppercase">
-            {party} must {paired ? verb + ' and ' + verb2 : verb} the {subject} in the {place}. 
+            {party} must {paired ? verb + ' and ' + verb2 : verb} the {desc} {subject} in the {place}. 
             <span className="text-xl md:text-3xl mt-4 md:mt-6 block">
-              {dothat} while dealing with {hinderance} and opposing {aan ? 'an' : 'a'} {opposition}.
+              {dothat} while dealing with {hinderance} and opposing {aan(opposition) ? 'an' : 'a'} {opposition}.
             </span>
           </div>
           <div className="button-container mt-16">
@@ -69,17 +75,17 @@ export default function Home() {
       <div className="absolute bottom-0 right-0 p-8 text-right flex flex-col text-xs text-[10px]">
         <span>
           Created by&nbsp;
-          <Link href="https://github.com/as3k" target="_blank">ZG</Link>
+          <Link href="https://github.com/as3k" target="_blank" className='underline'>ZG</Link>
         </span>
         <span>
           If you make it, make sure you make it&nbsp;
-          <Link href="https://opensource.org/">
+          <Link href="https://opensource.org/" className='underline'>
             Open Source
           </Link>
         </span>
         <span>
           Inspired by&nbsp; 
-          <Link href="https://whothefuckismydndcharacter.com/" target="_blank">
+          <Link href="https://whothefuckismydndcharacter.com/" target="_blank" className='underline'>
             WTFIMDNDC
           </Link>
         </span>
