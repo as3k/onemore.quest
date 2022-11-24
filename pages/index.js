@@ -1,19 +1,16 @@
 import { locations, descriptions, verbs as v, concepts } from 'fun-word-list'
 import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import Footer from '../components/footer'
+import Header from '../components/header'
+import { verbs, subjects, places, hinderances, oppositions } from '../utils/tdwords'
 
 export default function Home() {
   const getRandomItem = (arr) => { return arr[Math.floor(Math.random()*arr.length)] }
 
   const sino = [true, false, true, false, true, true, false, false, false, false, false ]
   const parties = ['The Party', 'The group', 'Our Heroes', 'Our Mighty Crew', 'Our band of miscreants']
-  const verbs = [ 'Attack', 'Rescue', 'Escort', 'Investigate', 'Aid', 'Transport', 'Steal', 'Fight', 'Blackmail', 'Hide', 'Shelter', 'Trick', 'Negotiate', 'Defend', 'Retrieve', 'Overcome', 'Invade', 'Kill', 'Capture', 'Free', 'Secure', 'Heal', 'Trade', 'Scare', 'Hunt', 'Find', 'Defend', 'Prevent', 'Cause', 'Serve', 'Take', 'Bargain', 'Explore', 'Sabotage', 'Kidnap', 'Lead', 'kill','assasinate','steal','plunder','sneak past','save','rescue','arrest','capture','destroy','escape','speak with','protect','infiltrate']
-  const subjects = ['Human','Fey', 'Dwarf', 'Goblin','Salimar', 'Treefolk','Karhu','Lizardfolk', 'Royalty', 'Priest','Wizard', 'Scribe','Monster','Animal', 'Pirate', 'Bandit','Magic', 'Item', 'Enemy','Passenger','Riddle', 'Merchandise', 'Contraband','Performer', 'Caravan','Merchant','Thief', 'Warrior', 'Healer','Peasant', 'Beggar','Traveler','Innkeeper', 'Ghost', 'City','Watch', 'Witness', 'Alchemist',]
-  const places = ['Mountain Top','Ruins','Ocean','Desert','Island','Canyon','Mountain Pass','Temple','Ice Cave','Volcano','Forest','Whirlpool','Sunken City','Subterranean City','Forbidden City','Floating Fortress','Airship Fortress','Market','Tower','City Jail','Bridge','Sewers','Docks','Dungeon ','Graveyard ','Gambling House','Faerie Realm','Land of Dreams','Other Dimension','Castle','Monastery','Mine','Enemy Territory ','Dragon’s Den','Labyrinth',]
-  const hinderances = ['Ally','Betrayal','Love','Broken Promise','Deception','Rival','Mentor','Family','Attack','Trap','Physical Illness','Weather','Finances','Theft','Spy','Double Agent','Revenge','Mental Illness','Red Herring','Transportation','Hostage','Kidnapping','Assassination','City Watch','Greed','Trust','Hatred','Jealousy','Bad Luck','Pride','Laziness','Lust','Gluttony','Neglect','Forgetfulness','Ignorance',]
-  const oppositions = ['City Watch','City Leader','Spy','Politics','Moneylender','Scandal','Bandits','Pirates','Secret Society','Wizards’ Guild','Thieves’ Guild','Army','Monster','Flora','Fauna','Undead','Magic','Disease','Wizard','Necromancer','Cultists','Merchants','Alchemist','Murderer','Assassin','Time','Demon','Invasion ','Evil Genius','Dragon','Robber','Imposter','Faerie ','Curse ','Parasite ','Adventurers',]
   const doThats = ['Do That', 'They must do that', 'That\'s the task', 'Complete that']
 
   const [party, setParty] = useState('')
@@ -38,7 +35,6 @@ export default function Home() {
     setDoThat (getRandomItem(doThats) )
     setPaired( getRandomItem(sino) )
     setDesc( getRandomItem(descriptions) )
-    
   }
 
   const aan = (word) => {
@@ -58,6 +54,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Header />
       <main>
         <div className="container max-w-[658px] mx-auto py-8 md:py-16 px-4">
           <div className="quest text-3xl md:text-5xl font-bold leading-tight uppercase">
@@ -72,24 +69,7 @@ export default function Home() {
         </div>
       </main>
 
-      <div className="absolute bottom-0 right-0 p-8 text-right flex flex-col text-xs text-[10px]">
-        <span>
-          Created by&nbsp;
-          <Link href="https://github.com/as3k" target="_blank" className='underline'>ZG</Link>
-        </span>
-        <span>
-          If you make it, make sure you make it&nbsp;
-          <Link href="https://opensource.org/" className='underline'>
-            Open Source
-          </Link>
-        </span>
-        <span>
-          Inspired by&nbsp; 
-          <Link href="https://whothefuckismydndcharacter.com/" target="_blank" className='underline'>
-            WTFIMDNDC
-          </Link>
-        </span>
-      </div>
+      <Footer />
     </div>
   )
 }
